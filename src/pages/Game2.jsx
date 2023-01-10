@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SuCard from "../components/SuCard";
+import Ctx from "../context/Ctx2";
+import SuCard from "../components/sudoku";
 export default () => {
     const n = 3;
-    const data = "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--";
+    const [data, setData] = useState( "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--");
     const [board, setBoard] = useState([]);
     useEffect(() => {
         let cnt = n ** 2;
@@ -20,26 +21,30 @@ export default () => {
             }
         }
         setBoard(brd);
-        console.log(brd);
     }, []);
-    return <div 
-        className="board" 
-        style={{
-            gridTemplateColumns: `repeat(${n**2}, auto)`
-        }}
-    >
-        {board.length > 0 && board.reduce((arr, el, i) => {
-            el.forEach((cell, j) => {
-                arr.push(<SuCard 
-                    key={i * (n**2) + j} 
-                    n={i * (n**2) + j} 
-                    content={cell} 
-                    cnt={n}
-                    setBoard={setBoard}
-                    board={board}
-                />)
-            })
-            return arr;
-        }, [])}
-    </div>
+    return <Ctx.Provider value={{
+        data: data,
+        setData: setData,
+        board: board,
+        setBoard: setBoard
+    }}>
+        <div 
+            className="board" 
+            style={{
+                gridTemplateColumns: `repeat(${n**2}, auto)`
+            }}
+        >
+            {board.length > 0 && board.reduce((arr, el, i) => {
+                el.forEach((cell, j) => {
+                    arr.push(<SuCard 
+                        key={i * (n**2) + j} 
+                        n={i * (n**2) + j} 
+                        content={cell} 
+                        cnt={n}
+                    />)
+                })
+                return arr;
+            }, [])}
+        </div>
+    </Ctx.Provider> 
 }

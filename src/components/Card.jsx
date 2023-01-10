@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Ctx from "../Ctx";
+import Ctx from "../context/Ctx1";
 
 export default ({index, char}) => {
     const {setBoard, player, setPlayer, setCnt} = useContext(Ctx);

@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import Ctx from "../../context/Ctx2";
 
-export default ({n, content, setBoard, board}) => {
+export default ({n, content}) => {
     // Math.floor(80 / board.length) = 8 => i
+    const {data, board, setBoard} = useContext(Ctx);
     const i = Math.floor(n / board.length);
     const j = n - i * board.length;
     const [val, setVal] = useState(0);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Ctx from "../Ctx";
+import Ctx from "../context/Ctx1";
 import Board from "../components/Board";
 
 function Game1() {
@@ -80,7 +80,7 @@ function Game1() {
     cnt: cnt,
     setCnt: setCnt
   }}>
-    <Board/>
+    <Board />
   </Ctx.Provider>
 }
 
